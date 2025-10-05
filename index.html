@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waleed Messenger</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            opacity: 0.8;
+            font-size: 1.1em;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .form-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #34495e;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="file"],
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-stop {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        .btn-stop:hover {
+            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .success-title {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .stop-key {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 1.1em;
+            margin: 10px 0;
+            word-break: break-all;
+        }
+
+        .error-box {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .alert {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ffeaa7;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .file-input {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-input:hover {
+            border-color: #3498db;
+            background: #e3f2fd;
+        }
+
+        .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+        }
+
+        .instructions h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .instructions ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .instructions li {
+            padding: 8px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .instructions li:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Waleed Messenger</h1>
+            <p>Advanced Facebook Message Sender</p>
+        </div>
+
+        <div class="content">
+            <!-- Start Task Section -->
+            <div class="form-section">
+                <h2 class="section-title">Start New Task</h2>
+                <form method="POST" enctype="multipart/form-data">
+                    <!-- Token Option -->
+                    <div class="form-group">
+                        <label>Token Option:</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="singleToken" name="tokenOption" value="single" checked>
+                                <label for="singleToken">Single Token</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="multiToken" name="tokenOption" value="multi">
+                                <label for="multiToken">Multiple Tokens (File)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Single Token -->
+                    <div class="form-group" id="singleTokenGroup">
+                        <label for="singleTokenInput">Facebook Token:</label>
+                        <input type="text" id="singleTokenInput" name="singleToken" placeholder="Enter your Facebook token...">
+                    </div>
+
+                    <!-- Multiple Tokens -->
+                    <div class="form-group" id="multiTokenGroup" style="display: none;">
+                        <label for="tokenFile">Token File (one token per line):</label>
+                        <div class="file-input" onclick="document.getElementById('tokenFile').click()">
+                            <span>📁 Click to upload token file</span>
+                            <input type="file" id="tokenFile" name="tokenFile" accept=".txt" style="display: none;">
+                        </div>
+                    </div>
+
+                    <!-- Thread ID -->
+                    <div class="form-group">
+                        <label for="threadId">Thread ID:</label>
+                        <input type="text" id="threadId" name="threadId" placeholder="Enter Facebook thread ID...">
+                    </div>
+
+                    <!-- Sender Name -->
+                    <div class="form-group">
+                        <label for="kidx">Sender Name:</label>
+                        <input type="text" id="kidx" name="kidx" placeholder="Enter sender name...">
+                    </div>
+
+                    <!-- Delay -->
+                    <div class="form-group">
+                        <label for="time">Delay (seconds):</label>
+                        <input type="number" id="time" name="time" value="1" min="1" placeholder="Delay between messages">
+                    </div>
+
+                    <!-- Messages File -->
+                    <div class="form-group">
+                        <label for="txtFile">Messages File (one message per line):</label>
+                        <div class="file-input" onclick="document.getElementById('txtFile').click()">
+                            <span>📁 Click to upload messages file</span>
+                            <input type="file" id="txtFile" name="txtFile" accept=".txt" style="display: none;">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn">🚀 Start Messaging Task</button>
+                </form>
+
+                <!-- Messages HTML -->
+                {{ msg_html | safe }}
+            </div>
+
+            <!-- Stop Task Section -->
+            <div class="form-section">
+                <h2 class="section-title">Stop Task</h2>
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="taskId">Stop Key:</label>
+                        <input type="text" id="taskId" name="taskId" placeholder="Enter your stop key...">
+                    </div>
+                    <button type="submit" class="btn btn-stop">⏹️ Stop Task</button>
+                </form>
+
+                <!-- Stop HTML -->
+                {{ stop_html | safe }}
+            </div>
+
+            <!-- Instructions -->
+            <div class="instructions">
+                <h3>📋 How to Use:</h3>
+                <ul>
+                    <li>🔑 <strong>Tokens:</strong> Use single token or upload multiple tokens from file</li>
+                    <li>💬 <strong>Thread ID:</strong> Get from Facebook conversation URL</li>
+                    <li>👤 <strong>Sender Name:</strong> Name that will appear before each message</li>
+                    <li>⏱️ <strong>Delay:</strong> Time between messages in seconds</li>
+                    <li>📄 <strong>Messages File:</strong> Text file with one message per line</li>
+                    <li>🔑 <strong>Save Stop Key:</strong> Important! Save the key to stop task later</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle between single and multiple tokens
+        document.getElementById('singleToken').addEventListener('change', function() {
+            document.getElementById('singleTokenGroup').style.display = 'block';
+            document.getElementById('multiTokenGroup').style.display = 'none';
+        });
+
+        document.getElementById('multiToken').addEventListener('change', function() {
+            document.getElementById('singleTokenGroup').style.display = 'none';
+            document.getElementById('multiTokenGroup').style.display = 'block';
+        });
+
+        // Show file name when selected
+        document.getElementById('tokenFile').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || 'No file chosen';
+            e.target.parentElement.querySelector('span').textContent = '📁 ' + fileName;
+        });
+
+        document.getElementById('txtFile').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || 'No file chosen';
+            e.target.parentElement.querySelector('span').textContent = '📁 ' + fileName;
+        });
+    </script>
+</body>
+</html>
